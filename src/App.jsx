@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Props from "./components/Props/Props";
@@ -9,7 +9,7 @@ import UseRefExample from "./components/useRef/useRefExmaple";
 import Memo from "./components/useMemo/Memo";
 import UseRef from "./components/useRef/UseRef";
 import CallBackFn from "./components/useCallBack/CallBackFn";
-import JsonDummy from "./components/useEffect/JsonDummy";
+const JsonDummy = lazy(() => import("./components/useEffect/JsonDummy"))
 
 const appRouter = createBrowserRouter([
   {
@@ -52,7 +52,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/jsondummy",
-        element: <JsonDummy />,
+        element: <Suspense fallback={<h1>Loading...</h1>}> <JsonDummy /></Suspense> ,
       },
     ],
   },
