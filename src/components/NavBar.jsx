@@ -1,36 +1,51 @@
 import React from "react";
-import Props from "./Props/Props";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+const links = [
+  { to: "/", label: "Body" },
+  { to: "/props", label: "Props" },
+  { to: "/user", label: "User" },
+  { to: "/maprender", label: "MapRender" },
+  { to: "/useRef", label: "UseRef" },
+  { to: "/memo", label: "UseMemo" },
+  { to: "/callback", label: "UseCallback" },
+  { to: "/jsondummy", label: "DummyApi" },
+  { to: "/jsonuser/1", label: "UseParams" },
+];
 
 const NavBar = () => {
+  const { pathname } = useLocation();
+
   return (
-    <div className=" bg-gray-600">
-    <Link to="/">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 "> Body</button>
-      </Link>
-      <Link to="/props">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 ">Props</button>
-      </Link>
-      <Link to="/user">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 ">User</button>
-      </Link>
-      <Link to="/maprender">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 ">MapRender</button>
-      </Link>
-      <Link to="/useRef">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 ">UseRef</button>
-      </Link>
-      <Link to="/memo">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 ">UseMemo</button>
-      </Link>
-      <Link to="/callback">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 ">UseCallBackFn</button>
-      </Link>
-      <Link to="/jsondummy">
-        <button className=" m-2 px-2 py-2 bg-gray-400 text-lg font-bold rounded-lg cursor-pointer hover:bg-amber-200 ">DummyApi</button>
-      </Link>
-      
-    </div>
+    <nav className="bg-stone-950 border-b border-stone-800 px-6 py-0 flex items-center gap-1 overflow-x-auto">
+      {/* Logo mark */}
+      <span className="text-amber-500 font-black text-lg tracking-tighter mr-4 shrink-0">
+        ⬡ DEV
+      </span>
+
+      {links.map(({ to, label }) => {
+        const isActive =
+          pathname === to || (to !== "/" && pathname.startsWith(to));
+        return (
+          <Link key={to} to={to}>
+            <button
+              className={`relative px-3 py-4 text-xs font-semibold tracking-widest uppercase transition-colors duration-200 whitespace-nowrap
+                ${
+                  isActive
+                    ? "text-amber-400"
+                    : "text-stone-500 hover:text-stone-200"
+                }`}
+            >
+              {label}
+              {/* Active underline */}
+              {isActive && (
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-amber-500" />
+              )}
+            </button>
+          </Link>
+        );
+      })}
+    </nav>
   );
 };
 

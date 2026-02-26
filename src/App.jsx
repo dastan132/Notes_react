@@ -9,7 +9,8 @@ import UseRefExample from "./components/useRef/useRefExmaple";
 import Memo from "./components/useMemo/Memo";
 import UseRef from "./components/useRef/UseRef";
 import CallBackFn from "./components/useCallBack/CallBackFn";
-const JsonDummy = lazy(() => import("./components/useEffect/JsonDummy"))
+import JsonUser from "./components/useEffect/JsonUser";
+const JsonDummy = lazy(() => import("./components/useEffect/JsonDummy"));
 
 const appRouter = createBrowserRouter([
   {
@@ -52,8 +53,14 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/jsondummy",
-        element: <Suspense fallback={<h1>Loading...</h1>}> <JsonDummy /></Suspense> ,
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            {" "}
+            <JsonDummy />{" "}
+          </Suspense>
+        ),
       },
+      { path: "/jsonuser/:id", element: <JsonUser /> },
     ],
   },
 ]);
