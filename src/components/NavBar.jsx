@@ -11,6 +11,7 @@ const links = [
   { to: "/callback", label: "UseCallback" },
   { to: "/jsondummy", label: "DummyApi" },
   { to: "/jsonuser/1", label: "UseParams" },
+  { to: "/mouse", label: "Mouse Follower"}
 ];
 
 const NavBar = () => {

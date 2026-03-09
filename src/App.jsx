@@ -10,6 +10,7 @@ import Memo from "./components/useMemo/Memo";
 import UseRef from "./components/useRef/UseRef";
 import CallBackFn from "./components/useCallBack/CallBackFn";
 import JsonUser from "./components/useEffect/JsonUser";
+import MouseFollows from "./components/MouseTrackCircle/MouseFollows";
 const JsonDummy = lazy(() => import("./components/useEffect/JsonDummy"));
 
 const appRouter = createBrowserRouter([
@@ -17,6 +18,10 @@ const appRouter = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "/mouse",
+        element: <MouseFollows />,
+      },
       {
         path: "/props",
         element: <Props />,
