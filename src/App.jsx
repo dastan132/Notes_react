@@ -11,6 +11,10 @@ import UseRef from "./components/useRef/UseRef";
 import CallBackFn from "./components/useCallBack/CallBackFn";
 import JsonUser from "./components/useEffect/JsonUser";
 import MouseFollows from "./components/MouseTrackCircle/MouseFollows";
+import Login from "./components/Authentication/Login";
+import AuthProvider from "./components/Authentication/AuthProvider";
+import ProtectedRoute from "./components/Authentication/ProtectedRoute";
+
 const JsonDummy = lazy(() => import("./components/useEffect/JsonDummy"));
 
 const appRouter = createBrowserRouter([
@@ -19,59 +23,72 @@ const appRouter = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/mouse",
-        element: <MouseFollows />,
-      },
-      {
-        path: "/props",
-        element: <Props />,
-      },
-      {
         path: "/",
         element: <Body />,
       },
       {
-        path: "/user",
-        element: <User />,
+        path: "/login",
+        element: <Login />,
       },
       {
-        path: "/maprender",
-        element: <MapReducer />,
-      },
-      {
-        path: "/useref",
-        element: (
-          <>
-            <UseRefExample />
-            <UseRef />
-          </>
-        ),
-      },
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/mouse", element: <MouseFollows /> },
+          {
+            path: "/props",
+            element: <Props />,
+          },
 
-      {
-        path: "/memo",
-        element: <Memo />,
+          {
+            path: "/user",
+            element: <User />,
+          },
+          {
+            path: "/maprender",
+            element: <MapReducer />,
+          },
+          {
+            path: "/useref",
+            element: (
+              <>
+                <UseRefExample />
+                <UseRef />
+              </>
+            ),
+          },
+          {
+            path: "/memo",
+            element: <Memo />,
+          },
+          {
+            path: "/callback",
+            element: <CallBackFn />,
+          },
+          {
+            path: "/jsondummy",
+            element: (
+              <Suspense fallback={<h1>Loading...</h1>}>
+                {" "}
+                <JsonDummy />{" "}
+              </Suspense>
+            ),
+          },
+          {
+            path: "/jsonuser/:id",
+            element: <JsonUser />,
+          },
+        ],
       },
-      {
-        path: "/callback",
-        element: <CallBackFn />,
-      },
-      {
-        path: "/jsondummy",
-        element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
-            {" "}
-            <JsonDummy />{" "}
-          </Suspense>
-        ),
-      },
-      { path: "/jsonuser/:id", element: <JsonUser /> },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={appRouter} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={appRouter} />;
+    </AuthProvider>
+  );
 }
 
 export default App;
