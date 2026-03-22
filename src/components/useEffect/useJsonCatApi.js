@@ -5,6 +5,8 @@ const useJsonCatApi = () => {
   const [categories, setCatrgories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,7 +22,10 @@ const useJsonCatApi = () => {
     };
     fetchData();
   }, []);
+
   return { categories, error, loading };
 };
+
+
 
 export default useJsonCatApi;

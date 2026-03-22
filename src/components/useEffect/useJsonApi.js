@@ -1,26 +1,38 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { JSON_API } from "./Context";
 
 const useJsonApi = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [currentpage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(8);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(JSON_API);
-        const json = await data.json();
-        console.log("main", json.products);
+        const res = await fetch(JSON_API);
+        const json = await res.json();
         setProducts(json.products);
-      } catch (error) {
-        setError(error.message);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
+
     fetchData();
   }, []);
-  return { products, error, loading };
+
+  return {
+    products,
+    loading,
+    error,
+    currentpage,
+    postPerPage,
+    setCurrentPage,
+  };
 };
 
 export default useJsonApi;
