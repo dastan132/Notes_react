@@ -13,18 +13,17 @@ const Pagination = ({
   }
 
   return (
-    <div>
+    <div className="flex flex-wrap gap-2 mt-4 justify-center">
       {pages.map((page) => (
         <button
-          className=" cursor-pointer bg-amber-400"
           key={page}
           onClick={() => setCurrentPage(page)}
-          style={{
-            margin: "5px",
-            padding: "5px 10px",
-            fontWeight: currentpage === page ? "bold" : "normal",
-            backgroundColor: currentpage === page ? "#ddd" : "#fff",
-          }}
+          className={`px-3 py-1 rounded-md border transition duration-200
+            ${
+              currentpage === page
+                ? "bg-blue-500 text-white font-bold border-blue-500"
+                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+            }`}
         >
           {page}
         </button>

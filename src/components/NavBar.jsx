@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import  useAuth  from "./Authentication/useAuth";
+import useAuth from "./Authentication/useAuth";
 
 const links = [
   { to: "/", label: "Body" },
@@ -13,6 +13,8 @@ const links = [
   { to: "/jsondummy", label: "DummyApi" },
   { to: "/jsonuser/1", label: "UseParams" },
   { to: "/mouse", label: "Mouse Follower" },
+  { to: "/reducer", label: "UseReduce" },
+  { to: "/accordion", label: "Accordion" },
 ];
 
 const NavBar = () => {

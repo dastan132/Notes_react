@@ -14,6 +14,8 @@ import MouseFollows from "./components/MouseTrackCircle/MouseFollows";
 import Login from "./components/Authentication/Login";
 import AuthProvider from "./components/Authentication/AuthProvider";
 import ProtectedRoute from "./components/Authentication/ProtectedRoute";
+import ReducerHook from "./components/useReducer/ReducerHook";
+import Items from "./components/accordion/Items";
 
 const JsonDummy = lazy(() => import("./components/useEffect/JsonDummy"));
 
@@ -34,9 +36,14 @@ const appRouter = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           { path: "/mouse", element: <MouseFollows /> },
+          { path: "/reducer", element: <ReducerHook /> },
           {
             path: "/props",
             element: <Props />,
+          },
+          {
+            path: "/accordion",
+            element: <Items />,
           },
 
           {
@@ -68,8 +75,7 @@ const appRouter = createBrowserRouter([
             path: "/jsondummy",
             element: (
               <Suspense fallback={<h1>Loading...</h1>}>
-                {" "}
-                <JsonDummy />{" "}
+                <JsonDummy />
               </Suspense>
             ),
           },
@@ -81,14 +87,14 @@ const appRouter = createBrowserRouter([
       },
     ],
   },
-]);
+])
 
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={appRouter} />;
+      <RouterProvider router={appRouter} />
     </AuthProvider>
-  );
+  )
 }
 
 export default App;

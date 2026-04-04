@@ -8,7 +8,7 @@ const Body = () => {
       <NavBar />
       <Outlet />
     </>
-  );
-};
+  )
+}
 
 export default Body;
